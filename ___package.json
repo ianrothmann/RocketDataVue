@@ -1,0 +1,8 @@
+{
+
+  "devDependencies": {
+    "debounce": "^1.0.0",
+    "vue": "^2.3.3",
+    "moment": "^2.18.1"
+  }
+}
