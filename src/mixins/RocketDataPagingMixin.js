@@ -64,6 +64,7 @@ export default {
             }
         },
         totalItems(){
+
             if(this.recordSet&&this.recordSet.totalRowCount){
                 return this.recordSet.totalRowCount;
             }else{

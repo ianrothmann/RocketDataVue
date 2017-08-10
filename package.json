@@ -1,0 +1,27 @@
+{
+  "name": "rocket-data-vue",
+  "version": "0.1.3",
+  "description": "Rocket Data for Vue 2",
+  "main": "dist/rocketdata.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianrothmann/RocketDataVue.git"
+  },
+  "keywords": [
+    "Rocket",
+    "Vue"
+  ],
+  "author": "Ian Rothmann",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ianrothmann/RocketDataVue/issues"
+  },
+  "homepage": "https://github.com/ianrothmann/RocketDataVue#readme",
+  "devDependencies": {
+    "debounce": "^1.0.0",
+    "rocketforms": "^0.1.0"
+  }
+}

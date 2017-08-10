@@ -10,12 +10,13 @@
         ></v-select></div>
         <div class="datatable__actions__pagination">
 
-            <rw-menu offset-y>
+            <rw-menu offset-y v-if="totalPages>1">
                 <span slot="activator">{{displayPageRecords(pageNumber)}} of {{totalRecords}}</span>
                 <rw-list>
                     <rw-list-item :title="displayPageRecords(page)"  @click="pageJump(page)" v-for="page in pages" :key="page"></rw-list-item>
                 </rw-list>
             </rw-menu>
+            <span v-else>{{displayPageRecords(pageNumber)}} of {{totalRecords}}</span>
         </div>
         <v-btn icon :disabled="pageNumber<=1" @click.native="pageDown()"><v-icon>chevron_left</v-icon></v-btn>
 

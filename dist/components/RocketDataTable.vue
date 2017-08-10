@@ -254,7 +254,7 @@
                     props:{
                         pageNumber:this.pageNumber,
                         totalPages:this.totalPages,
-                        totalItems:this.totalItems,
+                        totalRecords:this.totalItems,
                         pages:this.pages,
                         pageSize:this.rowsPerPage,
                         pageSizeOptions:this.pageSizeOptions

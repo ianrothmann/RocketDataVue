@@ -6,9 +6,9 @@
          <rw-subheader>{{label}}</rw-subheader>
      <v-divider></v-divider>
 
-         <div class="pl-3 pr-3" v-if="filterType==='search'&&field.canQuery">
-               <v-btn-toggle :items="operators" v-model="searchOperator" small></v-btn-toggle>
+         <div class="pl-3 pr-3 pb-3" v-if="filterType==='search'&&field.canQuery">
              <rw-input prepend-icon="search" label="Search" hide-details v-model="searchTerm"></rw-input>
+             <v-btn-toggle :items="operators" v-model="searchOperator" small></v-btn-toggle>
 
          </div>
 
