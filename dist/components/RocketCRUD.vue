@@ -222,6 +222,7 @@
                         editSlots : this.editSlots,
                         menu : this.finalViewMenu
                     },
+                    scopedSlots : this.$scopedSlots,
                     on : {
                         back : ()=>{
                             this.currentState='display';
@@ -250,7 +251,8 @@
                             this.currentState='display';
 
                         }
-                    }
+                    },
+                    scopedSlots : this.$scopedSlots
                 });
             },
             renderAdd(h){
@@ -261,6 +263,7 @@
                         createModifiers : this.createModifiers,
                         createSlots : this.createSlots,
                     },
+                    scopedSlots : this.$scopedSlots,
                     on : {
                         input : (id)=>{
                             RocketEventHub.refresh(this.crudID);
