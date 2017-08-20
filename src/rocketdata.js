@@ -1,3 +1,4 @@
+import Vue from 'vue'
 window.debounce=require('debounce');
 Vue.component('rocket-data-provider', require('./components/RocketDataProvider.vue'));
 Vue.component('rocket-list', require('./components/RocketList.vue'));
@@ -34,3 +35,14 @@ window.RocketEventHub = new Vue({
         }
     }
 });
+
+export const RocketData = {};
+
+RocketData.install = function (Vue, options) {
+
+    Vue.prototype.$rocketData = {
+        refresh(id){
+            RocketEventHub.refresh(id);
+        }
+    }
+};

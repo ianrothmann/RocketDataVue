@@ -1,8 +1,8 @@
 <template>
     <v-menu lazy absolute bottom left>
-        <v-btn icon slot="activator"><v-icon>more_vert</v-icon></v-btn>
+        <v-btn icon slot="activator" v-if="processedRowMenu.length>0"><v-icon>more_vert</v-icon></v-btn>
         <v-list dense>
-            <div v-for="(item,index) in rowMenu" :key="index">
+            <div v-for="(item,index) in processedRowMenu" :key="index">
                 <v-list-tile @click="executeItem(item,$event)" v-if="item.label">
                     <v-list-tile-content>{{item.label}}</v-list-tile-content>
                     <v-list-tile-action v-if="item.icon"><v-icon>{{item.icon}}</v-icon></v-list-tile-action>
@@ -24,6 +24,21 @@
             rowMenu : Array,
             state : Object,
 
+        },
+        computed : {
+           processedRowMenu(){
+               const menu=[];
+               let idx=0;
+               for(let item of this.rowMenu){
+                   if((!item.hasOwnProperty('show')||item.show(this.record,this.state))){
+                       if(item.label||idx<this.rowMenu-1)
+                        menu.push(item);
+                   }
+                   idx++;
+               }
+
+               return menu;
+           }
         },
         methods : {
             executeItem(item,e){
