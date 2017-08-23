@@ -14,6 +14,7 @@ Vue.component('rocket-main-menu', require('./components/menus/RocketMainMenu.vue
 Vue.component('rocket-row-menu', require('./components/menus/RocketRowMenu.vue'));
 
 Vue.component('rocket-field-value', require('./components/displayfields/RocketFieldValueDisplay.vue'));
+Vue.component('rocket-field-value-location', require('./components/displayfields/RocketFieldLocationDisplay.vue'));
 Vue.component('rocket-field-value-image', require('./components/displayfields/RocketFieldImageDisplay.vue'));
 Vue.component('rocket-field-value-file', require('./components/displayfields/RocketFieldFileDisplay.vue'));
 Vue.component('rocket-field-value-multi', require('./components/displayfields/RocketFieldMultiValueDisplay.vue'));

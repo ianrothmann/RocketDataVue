@@ -26,6 +26,7 @@ _vue2.default.component('rocket-main-menu', require('./components/menus/RocketMa
 _vue2.default.component('rocket-row-menu', require('./components/menus/RocketRowMenu.vue'));
 
 _vue2.default.component('rocket-field-value', require('./components/displayfields/RocketFieldValueDisplay.vue'));
+_vue2.default.component('rocket-field-value-location', require('./components/displayfields/RocketFieldLocationDisplay.vue'));
 _vue2.default.component('rocket-field-value-image', require('./components/displayfields/RocketFieldImageDisplay.vue'));
 _vue2.default.component('rocket-field-value-file', require('./components/displayfields/RocketFieldFileDisplay.vue'));
 _vue2.default.component('rocket-field-value-multi', require('./components/displayfields/RocketFieldMultiValueDisplay.vue'));

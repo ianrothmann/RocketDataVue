@@ -56,6 +56,12 @@
                         files : [value]
                     }
                 }));
+            }else if(field.dataType==='location'){
+                displayChildren.push(h('rocket-field-value-location',{
+                    props : {
+                        location : value
+                    }
+                }));
             }else if(field.dataType==='images'){
                 displayChildren.push(h('rocket-field-value-image',{
                     props : {
