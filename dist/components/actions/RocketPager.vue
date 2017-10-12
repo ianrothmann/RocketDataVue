@@ -70,10 +70,11 @@
                 this.$emit('pageSize',size);
             },
             displayPageRecords(pageNumber){
-                const base=this.pageSize*pageNumber;
+                let base=this.pageSize*pageNumber;
                 if(base===0||isNaN(base))
-                    return '0 to 0';
-                return (base-this.pageSize+1) + ' to ' + base;
+                    return '0';
+
+                return (base-this.pageSize+1) + ' to ' + (this.totalRecords<base?this.totalRecords:base);
             }
         }
     }

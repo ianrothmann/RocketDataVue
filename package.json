@@ -1,6 +1,6 @@
 {
   "name": "rocket-data-vue",
-  "version": "0.2.0",
+  "version": "0.2.4",
   "description": "Rocket Data for Vue 2",
   "main": "dist/rocketdata.js",
   "scripts": {

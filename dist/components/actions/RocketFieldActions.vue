@@ -2,75 +2,81 @@
  <span>
   <span v-if="(field.canQuery||field.canOrder)&&fieldTypeEligable">
        <v-menu ref="menu" :close-on-content-click="false">
+
      <v-icon slot="activator" :class="{'info--text':active}">filter_list</v-icon>
-         <rw-subheader>{{label}}</rw-subheader>
-     <v-divider></v-divider>
-
-         <div class="pl-3 pr-3 pb-3" v-if="filterType==='search'&&field.canQuery">
-             <rw-input prepend-icon="search" label="Search" hide-details v-model="searchTerm"></rw-input>
-             <v-btn-toggle :items="operators" v-model="searchOperator" small></v-btn-toggle>
-
-         </div>
-
-
-         <div class="rw_field_actions_filter_container" v-if="filterType==='select'&&field.canQuery" ref="filterContainer">
-              <v-divider></v-divider>
-                  <v-text-field
-                          class="mt-1 mb-1"
-                          prepend-icon="search"
-                          label="Search"
-                          v-model="filterSearch"
-                          full-width
-                          single-line
-                          full-width
-                          hide-details
-                  ></v-text-field>
+     <v-card>
+             <rw-subheader>{{label}}</rw-subheader>
          <v-divider></v-divider>
-             <v-list dense>
-                 <v-list-tile avatar v-for="item in pagedFilterList" :key="item.value" @click="toggleFilterValue(item[field.filterListQueryPrimaryKey])">
-                    <v-list-tile-action>
-                      <v-checkbox :value="item[field.filterListQueryPrimaryKey]" :input-value="filterValue"></v-checkbox>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>{{item[field.filterListQueryDescriptor]}}</v-list-tile-title>
-                    </v-list-tile-content>
-              </v-list-tile>
-             </v-list>
-         </div>
-         <v-divider v-if="field.canOrder"></v-divider>
-          <v-list dense v-if="field.canOrder">
-                 <v-subheader>Sort options</v-subheader>
-                 <v-list-tile avatar @click="setSort('asc')">
-                        <v-list-tile-action>
-                          <v-icon :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='asc'}">arrow_downwards</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                          <v-list-tile-title :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='asc'}">Sort {{getAscDescription(field)}}</v-list-tile-title>
-                        </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile avatar @click="setSort('desc')">
-                        <v-list-tile-action>
-                          <v-icon :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='desc'}">arrow_upwards</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                          <v-list-tile-title :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='desc'}">Sort {{getDescDescription(field)}}</v-list-tile-title>
-                        </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile avatar @click="setSort(null)" v-if="innerSortState!==null">
-                        <v-list-tile-action>
-                          <v-icon>delete</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                          <v-list-tile-title>Remove sort</v-list-tile-title>
-                        </v-list-tile-content>
-                  </v-list-tile>
-             </v-list>
+
+             <div class="pl-3 pr-3 pb-3" v-if="filterType==='search'&&field.canQuery">
+                 <rw-input prepend-icon="search" label="Search" hide-details v-model="searchTerm"></rw-input>
+                 <br>
+                 <v-btn-toggle small :input-value="searchOperatorIdx" @change="updateSearchOperator($event)">
+                    <v-btn flat v-for="operator in operators" :key="operator.value">
+                        {{operator.text}}
+                    </v-btn>
+                 </v-btn-toggle>
+
+             </div>
+
+             <div class="rw_field_actions_filter_container" v-if="filterType==='select'&&field.canQuery" ref="filterContainer">
+                  <v-divider></v-divider>
+                      <v-text-field
+                              class="mt-1 mb-1"
+                              prepend-icon="search"
+                              label="Search"
+                              v-model="filterSearch"
+                              full-width
+                              single-line
+                              full-width
+                              hide-details
+                      ></v-text-field>
              <v-divider></v-divider>
+                 <v-list dense>
+                     <v-list-tile avatar v-for="item in pagedFilterList" :key="item.value" @click="toggleFilterValue(item[field.filterListQueryPrimaryKey])">
+                        <v-list-tile-action>
+                          <v-checkbox :value="item[field.filterListQueryPrimaryKey]" :input-value="filterValue"></v-checkbox>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-title>{{item[field.filterListQueryDescriptor]}}</v-list-tile-title>
+                        </v-list-tile-content>
+                  </v-list-tile>
+                 </v-list>
+             </div>
+             <v-divider v-if="field.canOrder"></v-divider>
+              <v-list dense v-if="field.canOrder">
+                     <v-subheader>Sort options</v-subheader>
+                     <v-list-tile avatar @click="setSort('asc')">
+                            <v-list-tile-action>
+                              <v-icon :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='asc'}">arrow_downwards</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                              <v-list-tile-title :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='asc'}">Sort {{getAscDescription(field)}}</v-list-tile-title>
+                            </v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile avatar @click="setSort('desc')">
+                            <v-list-tile-action>
+                              <v-icon :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='desc'}">arrow_upwards</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                              <v-list-tile-title :class="{'primary--text':innerSortState!==null&&innerSortState.direction==='desc'}">Sort {{getDescDescription(field)}}</v-list-tile-title>
+                            </v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile avatar @click="setSort(null)" v-if="innerSortState!==null">
+                            <v-list-tile-action>
+                              <v-icon>delete</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                              <v-list-tile-title>Remove sort</v-list-tile-title>
+                            </v-list-tile-content>
+                      </v-list-tile>
+                 </v-list>
+                 <v-divider></v-divider>
 
-            <rw-btn primary flat small @click="save()">Apply</rw-btn>
-            <rw-btn error flat @click="clear()" small>Clear</rw-btn>
-            <rw-btn flat @click="close()" small>Close</rw-btn>
-
+                <rw-btn primary flat small @click="save()">Apply</rw-btn>
+                <rw-btn error flat @click="clear()" small>Clear</rw-btn>
+                <rw-btn flat @click="close()" small>Close</rw-btn>
+    </v-card>
  </v-menu>
   </span>
 
@@ -155,6 +161,13 @@
                const end=this.scrollPage*this.scrollPageSize;
                return this.filterList.slice(start,end);
 
+            },
+            searchOperatorIdx(){
+                for(let i=0;i<this.operators.length;i++){
+                    if(this.operators[i].value===this.searchOperator)
+                        return i;
+                }
+                return -1;
             }
         },
         data(){
@@ -194,6 +207,9 @@
         },
         mixins : [SortStateFunctions,CommonFilterFunctionsMixin],
         methods : {
+          updateSearchOperator(value){
+              this.searchOperator=this.operators[value].value;
+          },
           filterScrollHandler(e){
 
               const scrollPerc=e.target.scrollTop/(e.target.scrollHeight-e.target.clientHeight);

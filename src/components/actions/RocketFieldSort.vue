@@ -49,7 +49,10 @@
             </li>
             <li data-divider="">
                     <v-menu>
-                        <v-btn slot="activator" small flat icon v-tooltip:bottom="{ 'html': 'Sort options' }"><v-icon>sort</v-icon></v-btn>
+                        <v-tooltip slot="activator" bottom>
+                            <v-btn slot="activator" small flat icon><v-icon>sort</v-icon></v-btn>
+                            <span>Sort options</span>
+                        </v-tooltip>
                         <v-list dense>
                             <v-list-tile @click="clearSort()">
                                 <v-list-tile-content>

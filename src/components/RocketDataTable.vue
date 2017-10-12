@@ -274,7 +274,7 @@
                 const titleChildren=[];
                 titleChildren.push(h('div',{class:'headline'},this.title));
                 titleChildren.push(h('v-spacer'));
-                titleChildren.push(h('v-btn',{
+                const refresh=h('v-btn',{
                     props:{
                         icon:true
                     },
@@ -283,12 +283,19 @@
                             this.loadData();
                         }
                     },
-                    directives : [{
-                        name:'tooltip',
-                        arg:'bottom',
-                        value:{ 'html': 'Refresh' }
-                    }]
-                },[h('v-icon',{},'refresh')]));
+                    slot:'activator'
+                },[h('v-icon',{},'refresh')]);
+
+
+               titleChildren.push(h('v-tooltip',{
+                    props:{
+                        bottom:true
+                    }
+                },[refresh,h('span',{},'Refresh')]));
+
+
+
+
 
                 titleChildren.push(h('rocket-main-menu',{
                     props : {
