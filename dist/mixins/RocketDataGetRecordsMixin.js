@@ -51,6 +51,7 @@ exports.default = {
                 if (typeof _this.dataLoaded === 'function') {
                     _this.dataLoaded();
                 }
+                _this.clearSelected();
             });
         }
     },

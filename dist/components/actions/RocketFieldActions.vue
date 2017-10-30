@@ -119,7 +119,8 @@
                 if(this.field.dataType==='enum'||this.field.dataType==='boolean'){
                     return 'select';
                 }else if((this.field.dataType==='select'||this.field.dataType==='multiselect')){//&&this.filterList.length<50){
-                    return 'select';
+                    return 'search';
+                    //return 'select';//ToDO
                 }else{
                     return 'search';
                 }
@@ -135,6 +136,7 @@
             },
             operators(){
                 const oper=[];
+
                 for(let operator of this.field.queryOperators){
                     oper.push({
                         value : operator,
@@ -183,6 +185,7 @@
             }
         },
         mounted(){
+
             this.selectDefaultOperator();
 
             this.$watch('sortState',()=>{
@@ -299,6 +302,7 @@
                  ];
              }else if(this.filterType==='select'){
                  for(let value of this.filterValue){
+
                      filters.push({
                          value,
                          operator: 'eq',

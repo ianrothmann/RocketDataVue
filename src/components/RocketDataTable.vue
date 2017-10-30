@@ -105,6 +105,7 @@
     import DataFilterMixin from '../mixins/RocketDataFilterMixin';
     import MenuMixin from '../mixins/RocketDataMenuMixin';
     import InitialDisplayStateMixin from '../mixins/RocketDataInitialDisplayStateMixin';
+    import SelectorMixin from '../mixins/RocketDataSelectorMixin';
 
     export default{
         props : {
@@ -115,7 +116,7 @@
                pagination : {}
            }
         },
-        mixins : [InitialDisplayStateMixin,DataFilterMixin,DataProviderMixin,GetRecordsMixin,PagingMixin,ValueDisplayMixin,SortMixin,SortStateFunctions,MenuMixin],
+        mixins : [InitialDisplayStateMixin,DataFilterMixin,DataProviderMixin,GetRecordsMixin,PagingMixin,ValueDisplayMixin,SortMixin,SortStateFunctions,MenuMixin,SelectorMixin],
         mounted(){
             this.numPageButtons=4;
 
@@ -125,6 +126,12 @@
             fieldHeaders(){
                 const headers=[];
                 if(this.definition&&this.definition.fields){
+                    if(this.enableSelection){
+                        headers.push({
+                            selector:true,
+                            sortable : false
+                        });
+                    }
                     Object.keys(this.definition.fields).forEach((fieldId)=>{
                         const field=this.definition.fields[fieldId];
 
@@ -175,40 +182,85 @@
                 const scopedSlots={};
                 scopedSlots['headerCell']=(props)=>{
                     const content=[];
-                    const directives=[];
-                    if(props.header.shortLabel!==props.header.label){
-                        directives.push( {
-                            name : 'tooltip',
-                            value : { 'html': props.header.label },
-                            arg: 'bottom'
-                        });
-                    }
-                    content.push(h('span',{
-                        directives
-                    },props.header.shortLabel));
-
-                    content.push(h('rocket-field-actions',{
-                        class : ['rocket_table_field_actions'],
-                        props : {
-                            fieldId : props.header.value,
-                            dataFilters : this.dataFilters,
-                            sortState : this.sortState,
-                            definition : this.definition,
-                        },
-                        on:{
-                            apply : (event)=>{
-                                this.processFieldAction(event);
-                            }
+                    if(props.header.selector){
+                        content.push(h('td',{},[
+                            h('v-checkbox',{
+                                props:{
+                                    color:'primary',
+                                    hideDetails:true,
+                                    inputValue:this.isAllSelected(),
+                                    indeterminate:this.isSomeSelected()
+                                },
+                                on:{
+                                    change:(selected)=>{
+                                        if(!selected)
+                                            this.clearSelected();
+                                        else
+                                            this.recordSelected(selected,this.recordSet.data);
+                                    }
+                                }
+                            })
+                        ]));
+                    }else{
+                        if(props.header.shortLabel!==props.header.label){
+                            content.push(h('v-tooltip',{
+                                props:{
+                                    bottom:true
+                                }
+                            },[
+                                h('span',{
+                                    slot:'activator'
+                                },props.header.shortLabel),
+                                h('span',{},props.header.label)
+                            ]));
+                        }else {
+                            content.push(h('span', {}, props.header.shortLabel));
                         }
-                    }));
+
+
+                        content.push(h('rocket-field-actions',{
+                            class : ['rocket_table_field_actions'],
+                            props : {
+                                fieldId : props.header.value,
+                                dataFilters : this.dataFilters,
+                                sortState : this.sortState,
+                                definition : this.definition,
+                            },
+                            on:{
+                                apply : (event)=>{
+                                    this.processFieldAction(event);
+                                }
+                            }
+                        }));
+
+                    }
 
                     return content;
                 };
 
                 scopedSlots['items']=(props)=>{
                     const content=[];
+                    if(this.enableSelection){
+
+                        content.push(h('td',{},[
+                            h('v-checkbox',{
+                                props:{
+                                    color:'primary',
+                                    hideDetails:true,
+                                    inputValue:this.isRecordSelected(props.item)
+                                },
+                                on:{
+                                    change:(selected)=>{
+                                        this.recordSelected(selected,props.item);
+                                    }
+                                }
+                            })
+                        ]));
+
+                    }
 
                     for(let fieldId of Object.keys(this.definition.fields)){
+
                         const field=this.definition.fields[fieldId];
                         content.push(h('td',{
                             class : {
@@ -244,9 +296,13 @@
                         items : this.recordSet.data || [],
                         loading : this.initialLoading,
                         hideActions : true,
-
                     },
-                    scopedSlots
+                    scopedSlots,
+                    on: {
+                        input:(val)=>{
+                            this.recordSelected(true,val);
+                        }
+                    }
                 });
             },
             renderPager(h){

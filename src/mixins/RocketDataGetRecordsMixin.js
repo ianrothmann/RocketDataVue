@@ -48,6 +48,7 @@ export default {
                 if (typeof this.dataLoaded === 'function') {
                     this.dataLoaded();
                 }
+                this.clearSelected();
             });
         }
 
