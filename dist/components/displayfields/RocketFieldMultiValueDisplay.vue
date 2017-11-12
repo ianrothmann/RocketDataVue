@@ -25,7 +25,7 @@
            moreText(){
                let val='';
                if(this.values.length>1)
-                   val+=' and '+this.values.length+' more...';
+                   val+=' and '+(this.values.length-1)+' more...';
                return val;
            }
         },

@@ -183,24 +183,25 @@
                 scopedSlots['headerCell']=(props)=>{
                     const content=[];
                     if(props.header.selector){
-                        content.push(h('td',{},[
-                            h('v-checkbox',{
-                                props:{
-                                    color:'primary',
-                                    hideDetails:true,
-                                    inputValue:this.isAllSelected(),
-                                    indeterminate:this.isSomeSelected()
-                                },
-                                on:{
-                                    change:(selected)=>{
-                                        if(!selected)
-                                            this.clearSelected();
-                                        else
-                                            this.recordSelected(selected,this.recordSet.data);
-                                    }
-                                }
-                            })
-                        ]));
+                       /* content.push(h('td',{class:['text-xs-center']},[
+
+                        ]));*/
+                       content.push( h('v-checkbox',{
+                           props:{
+                               color:'primary',
+                               hideDetails:true,
+                               inputValue:this.isAllSelected(),
+                               indeterminate:this.isSomeSelected()
+                           },
+                           on:{
+                               change:(selected)=>{
+                                   if(!selected)
+                                       this.clearSelected();
+                                   else
+                                       this.recordSelected(selected,this.recordSet.data);
+                               }
+                           }
+                       }));
                     }else{
                         if(props.header.shortLabel!==props.header.label){
                             content.push(h('v-tooltip',{
@@ -306,6 +307,12 @@
                 });
             },
             renderPager(h){
+                const slot=[];
+                if(this.$slots['pager-actions']){
+                    slot.push(h('div',{
+                        slot:'pager-actions'
+                    },this.$slots['pager-actions']));
+                }
                 return [h('v-divider'),h('rocket-pager',{
                     props:{
                         pageNumber:this.pageNumber,
@@ -323,7 +330,7 @@
                             this.setPageSize(event);
                         }
                     }
-                })];
+                },slot)];
 
             },
             renderTitle(h){
@@ -351,14 +358,16 @@
 
 
 
-
-
                 titleChildren.push(h('rocket-main-menu',{
                     props : {
                        mainMenu:this.mainMenu,
                        state:this.getRecordRetrievalParameters().state
                     }
                 }));
+
+                if (this.$slots.mainmenu){
+                    titleChildren.push(this.$slots.mainmenu);
+                }
 
                 return h('v-card-title',{},titleChildren);
             },
