@@ -1,25 +1,31 @@
 <template>
-          <div class="datatable__actions">
+          <div class="v-datatable__actions">
               <div class="text-xs-left" style="align-self: center;flex:auto">
                   <slot name="pager-actions"></slot>
               </div>
-            <div class="datatable__actions__select">{{pageSizeText || 'Rows per page'}}:<v-select
+            <div class="v-datatable__actions__select">{{pageSizeText || 'Rows per page'}}:<v-select
                     hide-details
                     :items="pageSizeOptions"
                     :value="rowsPerPage"
                     single-line
-                    bottom
+                    menu-props="bottom"
                     @change="setPageSize($event)"
             ></v-select></div>
-            <div class="datatable__actions__pagination">
-
-                <rw-menu offset-y v-if="totalPages>1">
-                    <span slot="activator">{{displayPageRecords(pageNumber)}} of {{totalRecords}}</span>
-                    <rw-list>
-                        <rw-list-item :title="displayPageRecords(page)"  @click="pageJump(page)" v-for="page in pages" :key="page"></rw-list-item>
-                    </rw-list>
-                </rw-menu>
+            <div class="v-datatable__actions__pagination">
+                <v-menu offset-y v-if="totalPages>1">
+                    <template v-slot:activator="{ on }">
+                        <span v-on="on">{{displayPageRecords(pageNumber)}} of {{totalRecords}}</span>
+                    </template>
+                    <v-list>
+                        <v-list-tile @click="pageJump(page)" v-for="page in pages" :key="page">
+                            <v-list-tile-content>
+                                <v-list-tile-title>{{displayPageRecords(page)}}</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
                 <span v-else>{{displayPageRecords(pageNumber)}} of {{totalRecords}}</span>
+
             </div>
             <v-btn icon :disabled="pageNumber<=1" @click.native="pageDown()"><v-icon>chevron_left</v-icon></v-btn>
 

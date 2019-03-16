@@ -2,7 +2,7 @@
     <span>
         <span v-if="(location===null||location==='')&&locationObj!==null">-</span>
          <v-dialog max-width="60%" v-else v-model="showMap" lazy absolute>
-             <v-btn icon slot="activator"><v-icon>location_on</v-icon></v-btn>
+             <v-btn icon slot="activator"><v-icon style="color:grey">location_on</v-icon></v-btn>
              <rw-map :value="locationObj" :center="locationObj" mode="view"></rw-map>
          </v-dialog>
     </span>

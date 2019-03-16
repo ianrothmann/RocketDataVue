@@ -2,14 +2,15 @@
  <span>
   <span v-if="(field.canQuery||field.canOrder)&&fieldTypeEligable">
        <v-menu ref="menu" :close-on-content-click="false">
-
-     <v-icon slot="activator" :class="{'info--text':active}">filter_list</v-icon>
+         <template v-slot:activator="{ on }">
+          <v-icon  v-on="on" :class="{'info--text':active}">filter_list</v-icon>
+      </template>
      <v-card>
-             <rw-subheader>{{label}}</rw-subheader>
+         <v-subheader>{{label}}</v-subheader>
          <v-divider></v-divider>
 
              <div class="pl-3 pr-3 pb-3" v-if="filterType==='search'&&field.canQuery">
-                 <rw-input prepend-icon="search" label="Search" hide-details v-model="searchTerm"></rw-input>
+                 <v-text-field prepend-icon="search" label="Search" hide-details v-model="searchTerm"></v-text-field>
                  <br>
                  <v-btn-toggle small :input-value="searchOperatorIdx" @change="updateSearchOperator($event)">
                     <v-btn flat v-for="operator in operators" :key="operator.value">
@@ -28,7 +29,6 @@
                               v-model="filterSearch"
                               full-width
                               single-line
-                              full-width
                               hide-details
                       ></v-text-field>
              <v-divider></v-divider>
@@ -73,9 +73,9 @@
                  </v-list>
                  <v-divider></v-divider>
 
-                <rw-btn primary flat small @click="save()">Apply</rw-btn>
-                <rw-btn error flat @click="clear()" small>Clear</rw-btn>
-                <rw-btn flat @click="close()" small>Close</rw-btn>
+                <v-btn color="primary" flat small @click="save()">Apply</v-btn>
+                <v-btn color="error" flat @click="clear()" small>Clear</v-btn>
+                <v-btn flat @click="close()" small>Close</v-btn>
     </v-card>
  </v-menu>
   </span>

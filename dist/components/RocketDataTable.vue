@@ -1,4 +1,4 @@
-<templatew>
+<!--<templatew>
     <v-card>
         <v-card-title>
             <div class="headline">{{title}}</div>
@@ -86,7 +86,7 @@
         ></rocket-pager>
 
     </v-card>
-</templatew>
+</templatew>-->
 <style>
 .rocket_table_field_actions i{
     font-size: 16px;

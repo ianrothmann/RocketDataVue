@@ -1,6 +1,6 @@
 {
   "name": "rocket-data-vue",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Rocket Data for Vue 2",
   "main": "dist/rocketdata.js",
   "scripts": {
@@ -22,6 +22,6 @@
   "homepage": "https://github.com/ianrothmann/RocketDataVue#readme",
   "devDependencies": {
     "debounce": "^1.0.0",
-    "rocketforms": "^0.1.0"
+    "rocketforms": "^0.3.0"
   }
 }

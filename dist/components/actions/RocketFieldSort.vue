@@ -1,11 +1,11 @@
 <template>
     <div>
 
-        <ul class="breadcrumbs sortFields pl-0 pr-0" v-if="definition">
-            <li data-divider=""><a class="breadcrumbs__item sortLabel pl-2"> Sort options</a></li>
+        <ul class="v-breadcrumbs sortFields pl-0 pr-0" v-if="definition">
+            <li data-divider=""><a class="v-breadcrumbs__item sortLabel pl-2"> Sort options</a></li>
             <li data-divider="/" v-for="(sortEntry,index) in sortState">
                 <v-menu offset-y>
-                    <a slot="activator" href="javascript:;" class="breadcrumbs__item sortField">
+                    <a slot="activator" href="javascript:;" class="v-breadcrumbs__item sortField">
                         {{getFieldLabel(definition.fields[sortEntry.fieldId])}}
                         <v-icon class="ml-1" v-if="sortEntry.direction==='asc'">arrow_downward</v-icon>
                         <v-icon class="ml-1" v-else>arrow_upward</v-icon>

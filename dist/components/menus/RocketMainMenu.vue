@@ -1,6 +1,8 @@
 <template>
     <v-menu lazy absolute bottom left v-if="mainMenu && mainMenu.length>0">
-        <v-btn icon slot="activator"><v-icon>more_vert</v-icon></v-btn>
+        <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on"><v-icon>more_vert</v-icon></v-btn>
+        </template>
         <v-list dense>
             <div v-for="(item,index) in mainMenu" :key="index">
                 <v-list-tile @click="executeItem(item,$event)" v-if="item.label">

@@ -4,14 +4,15 @@
             -
         </span>
          <v-menu v-else v-model="showMore" lazy absolute>
-             <span slot="activator">{{values[0][descriptor]}}<span class="grey--text" v-html="moreText"></span></span>
+              <template v-slot:activator="{ on }">
+                    <span v-on="on">{{values[0][descriptor]}}<span class="grey--text" v-html="moreText" style="cursor:pointer"></span></span>
+             </template>
              <v-list dense>
                  <v-list-tile v-for="value in values" :key="value[descriptor]">
                         {{value[descriptor]}}
                  </v-list-tile>
              </v-list>
          </v-menu>
-
     </span>
 
 </template>
