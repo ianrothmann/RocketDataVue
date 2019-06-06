@@ -12,24 +12,24 @@ var _vue2 = _interopRequireDefault(_vue);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.debounce = require('debounce');
-_vue2.default.component('rocket-data-provider', require('./components/RocketDataProvider.vue'));
-_vue2.default.component('rocket-list', require('./components/RocketList.vue'));
+_vue2.default.component('rocket-data-provider', require('./components/RocketDataProvider.vue').default);
+_vue2.default.component('rocket-list', require('./components/RocketList.vue').default);
 
-_vue2.default.component('rocket-crud', require('./components/RocketCRUD.vue'));
+_vue2.default.component('rocket-crud', require('./components/RocketCRUD.vue').default);
 
-_vue2.default.component('rocket-data-table', require('./components/RocketDataTable.vue'));
-_vue2.default.component('rocket-field-actions', require('./components/actions/RocketFieldActions.vue'));
-_vue2.default.component('rocket-field-sort', require('./components/actions/RocketFieldSort.vue'));
-_vue2.default.component('rocket-field-filter-display', require('./components/actions/RocketFieldFilterDisplay.vue'));
-_vue2.default.component('rocket-pager', require('./components/actions/RocketPager.vue'));
-_vue2.default.component('rocket-main-menu', require('./components/menus/RocketMainMenu.vue'));
-_vue2.default.component('rocket-row-menu', require('./components/menus/RocketRowMenu.vue'));
+_vue2.default.component('rocket-data-table', require('./components/RocketDataTable.vue').default);
+_vue2.default.component('rocket-field-actions', require('./components/actions/RocketFieldActions.vue').default);
+_vue2.default.component('rocket-field-sort', require('./components/actions/RocketFieldSort.vue').default);
+_vue2.default.component('rocket-field-filter-display', require('./components/actions/RocketFieldFilterDisplay.vue').default);
+_vue2.default.component('rocket-pager', require('./components/actions/RocketPager.vue').default);
+_vue2.default.component('rocket-main-menu', require('./components/menus/RocketMainMenu.vue').default);
+_vue2.default.component('rocket-row-menu', require('./components/menus/RocketRowMenu.vue').default);
 
-_vue2.default.component('rocket-field-value', require('./components/displayfields/RocketFieldValueDisplay.vue'));
-_vue2.default.component('rocket-field-value-location', require('./components/displayfields/RocketFieldLocationDisplay.vue'));
-_vue2.default.component('rocket-field-value-image', require('./components/displayfields/RocketFieldImageDisplay.vue'));
-_vue2.default.component('rocket-field-value-file', require('./components/displayfields/RocketFieldFileDisplay.vue'));
-_vue2.default.component('rocket-field-value-multi', require('./components/displayfields/RocketFieldMultiValueDisplay.vue'));
+_vue2.default.component('rocket-field-value', require('./components/displayfields/RocketFieldValueDisplay.vue').default);
+_vue2.default.component('rocket-field-value-location', require('./components/displayfields/RocketFieldLocationDisplay.vue').default);
+_vue2.default.component('rocket-field-value-image', require('./components/displayfields/RocketFieldImageDisplay.vue').default);
+_vue2.default.component('rocket-field-value-file', require('./components/displayfields/RocketFieldFileDisplay.vue').default);
+_vue2.default.component('rocket-field-value-multi', require('./components/displayfields/RocketFieldMultiValueDisplay.vue').default);
 
 window.RocketEventHub = new _vue2.default({
     data: {
