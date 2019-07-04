@@ -64,7 +64,7 @@
         computed : {
            finalMainMenu(){
                let menu=[];
-               if(this.canView){
+               if(this.canAdd){
                    menu.push({
                        label : 'Add...',
                        icon : 'add',
